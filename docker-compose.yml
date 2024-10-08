@@ -12,12 +12,28 @@ services:
 
   homeassistant:
     image: ghcr.io/home-assistant/home-assistant:stable
-    ports:
-      - 3001:8123
     volumes:
       - ${CONFIG_ROOT:-.}/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
-    restart: unless-stopped
+    restart: always
     privileged: true
     network_mode: host
+
+  homebridge:
+    image: homebridge/homebridge:latest
+    restart: always
+    network_mode: host
+    volumes:
+      - ${CONFIG_ROOT:-.}/homebridge:/homebridge
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+        max-file: '1'
+    healthcheck:
+      test: curl --fail localhost:8581 || exit 1
+      interval: 60s
+      retries: 5
+      start_period: 300s
+      timeout: 2s

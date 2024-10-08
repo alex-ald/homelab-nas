@@ -18,6 +18,7 @@ docker-compose.override.yml
 /adguardhome/conf
 /adguardhome/work
 /sabnzbd
+/homebridge
 
 
 homeassistant/*
