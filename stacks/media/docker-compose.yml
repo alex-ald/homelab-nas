@@ -1,0 +1,15 @@
+services:
+
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    restart: always
+    environment:
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - TZ=${TIMEZONE}
+      - VERSION=docker
+    network_mode: host
+    volumes:
+      - ${CONFIG_ROOT:-.}/plex/config:/config
+      - ${CONFIG_ROOT:-.}/plex/transcode:/transcode
+      - ${DATA_ROOT}:/data
