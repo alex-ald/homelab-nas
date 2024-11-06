@@ -1,6 +1,6 @@
 .env
 docker-compose.override.yml
-homepage/logs
+stacks/home/homepage/logs
 homepage/*.css
 homepage/*.js
 sonarr
@@ -15,3 +15,10 @@ gluetun
 /letsencrypt
 homebridge
 portainer
+logs
+*.log
+**/*.log
+**/*.sab
+**/*.sqlite3*
+**/*.db
+**/*.bak
